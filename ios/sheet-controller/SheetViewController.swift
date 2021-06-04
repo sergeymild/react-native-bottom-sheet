@@ -10,17 +10,6 @@ import UIKit
 import NotificationCenter
 import IQKeyboardManagerSwift
 
-public extension UIViewController {
-  func findSheetController() -> SheetViewController? {
-    var p = parent
-    while p != nil {
-      if p is SheetViewController { return (p  as! SheetViewController) }
-      p = p?.parent
-    }
-    return nil
-  }
-}
-
 //swiftlint:disable all
 open class SheetViewController: UIViewController {
   // MARK: - Public Properties
@@ -87,15 +76,6 @@ open class SheetViewController: UIViewController {
       }
     }
   }
-  
-  public var isBlurNeeded = false
-  private var blurView: UIView = {
-    let effect = UIBlurEffect(style: .light)
-    let view = UIVisualEffectView(effect: effect)
-    view.alpha = 0
-    
-    return view
-  }()
   
   public var willDismiss: ((SheetViewController) -> Void)?
   public var didDismiss: ((SheetViewController) -> Void)?
@@ -190,11 +170,6 @@ open class SheetViewController: UIViewController {
     }
     
     self.view.backgroundColor = .clear
-    if showIpadVersion {
-      view.addSubview(blurView) { view in
-        view.edges.pinToSuperview()
-      }
-    }
     self.setUpContainerView()
     
     if dismissable {
@@ -252,9 +227,7 @@ open class SheetViewController: UIViewController {
       self.containerView.transform = CGAffineTransform.identity
       self.actualContainerSize = .fixed(self.containerView.frame.height)
       
-      if self.showIpadVersion, self.isBlurNeeded {
-        self.blurView.alpha = 1
-      } else if self.overlayColor != .clear {
+      if self.overlayColor != .clear {
         self.view.backgroundColor = self.overlayColor
       }
     })
@@ -414,7 +387,6 @@ open class SheetViewController: UIViewController {
         y: self?.containerView.frame.height ?? 0
       )
       self?.view.backgroundColor = UIColor.clear
-      self?.blurView.alpha = 0
     }, completion: { [weak self] complete in
       self?.dismiss(animated: false, completion: completion)
     })

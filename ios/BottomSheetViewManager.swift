@@ -63,6 +63,9 @@ class BottomSheetView : UIView {
         showIpadVersion: false
       )
       
+      if sheetWeakRefs.isEmpty { sheetController.overlayColor = .clear }
+      sheetWeakRefs.append(SheetWeakRef(sheet: sheetController))
+      
       sheetController.topCornersRadius = CGFloat(borderRadius)
       sheetController.adjustForBottomSafeArea = true
       sheetController.extendBackgroundBehindHandle = false
@@ -73,15 +76,21 @@ class BottomSheetView : UIView {
       sheetController.didDismiss = { [weak self] _ in
         self?.removeFromSuperview()
         self?.onDismiss?(nil)
+        sheetWeakRefs.removeLast()
       }
     }
     
     deinit {
         debugPrint("BottomSheetViewManager deinit")
-        sheetController?.closeSheet()
+        dismissSheet()
     }
 }
 
+struct SheetWeakRef {
+    weak var sheet: SheetViewController?
+}
+
+var sheetWeakRefs: [SheetWeakRef] = []
 
 var topPresentingController: UIViewController {
   return UIApplication.shared.keyWindow!.rootViewController!.topViewController()
