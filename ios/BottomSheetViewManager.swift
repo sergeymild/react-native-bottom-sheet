@@ -1,32 +1,103 @@
-@objc(BottomSheetViewManager)
-class BottomSheetViewManager: RCTViewManager {
-
-  override func view() -> (BottomSheetView) {
-    return BottomSheetView()
-  }
-}
-
+@objc(BottomSheetView)
 class BottomSheetView : UIView {
 
-  @objc var color: String = "" {
-    didSet {
-      self.backgroundColor = hexStringToUIColor(hexColor: color)
+    @objc
+    var onDismiss: RCTBubblingEventBlock?
+    weak var sheetController: SheetViewController?
+    
+    private var sizeType: String = "dynamic"
+    
+    @objc
+    func setSheetSize(_ size: NSString) {
+      sizeType = size as String
     }
+    
+    private var borderRadius: Double = 12 {
+      didSet {
+        sheetController?.topCornersRadius = CGFloat(borderRadius)
+      }
+    }
+    
+    @objc
+    func setBorderRadius(_ radius: Double) {
+      borderRadius = radius
+    }
+    
+    @objc
+    func dismissSheet() {
+      sheetController?.closeSheet(completion: { [weak self] in
+        self?.sheetController = nil
+      })
+    }
+      
+    override init(frame: CGRect) {
+      super.init(frame: frame)
+      alpha = 0
+    }
+    
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func addSubview(_ view: UIView) {
+      //super.addSubview(view)
+      if sheetController != nil { return }
+      self.pres(view)
+    }
+    
+    override func layoutSubviews() {
+      super.layoutSubviews()
+      frame = .zero
+    }
+    
+    
+    func pres(_ view: UIView) {
+      let v = view
+      let controller = UIViewController()
+      let sheetView = BottomSheetScrollView(child: v, sizeType: sizeType)
+      controller.view = sheetView
+
+      let sheetController = SheetViewController(
+        controller: controller,
+        sizes: [.fixed(1)],
+        showIpadVersion: false
+      )
+      
+      sheetController.topCornersRadius = CGFloat(borderRadius)
+      sheetController.adjustForBottomSafeArea = true
+      sheetController.extendBackgroundBehindHandle = false
+      
+      sheetView.sheetController = sheetController
+      topPresentingController.present(sheetController, animated: false)
+      self.sheetController = sheetController
+      sheetController.didDismiss = { [weak self] _ in
+        self?.removeFromSuperview()
+        self?.onDismiss?(nil)
+      }
+    }
+}
+
+
+var topPresentingController: UIViewController {
+  return UIApplication.shared.keyWindow!.rootViewController!.topViewController()
+}
+
+extension UIViewController {
+  
+  func topViewController() -> UIViewController {
+    topViewController(rootViewController: self)
   }
 
-  func hexStringToUIColor(hexColor: String) -> UIColor {
-    let stringScanner = Scanner(string: hexColor)
-
-    if(hexColor.hasPrefix("#")) {
-      stringScanner.scanLocation = 1
+  func topViewController(rootViewController: UIViewController) -> UIViewController {
+    
+    guard let pvc = rootViewController.presentedViewController else {
+      return rootViewController
     }
-    var color: UInt32 = 0
-    stringScanner.scanHexInt32(&color)
-
-    let r = CGFloat(Int(color >> 16) & 0x000000FF)
-    let g = CGFloat(Int(color >> 8) & 0x000000FF)
-    let b = CGFloat(Int(color) & 0x000000FF)
-
-    return UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: 1)
+    
+    if let nvc = pvc as? UINavigationController {
+      return topViewController(rootViewController: nvc.topViewController!)
+    }
+    
+    return topViewController(rootViewController: pvc)
   }
 }

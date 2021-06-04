@@ -1,14 +1,32 @@
-import * as React from 'react';
+import * as React from 'react'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 
-import { StyleSheet, View } from 'react-native';
-import BottomSheetViewManager from 'react-native-bottom-sheet';
+import {useBottomSheetView} from '../../src/useBottomSheetView'
 
 export default function App() {
+  const FirstBottomSheet = useBottomSheetView()
+
   return (
-    <View style={styles.container}>
-      <BottomSheetViewManager color="#32a852" style={styles.box} />
-    </View>
-  );
+    <>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={{marginTop: 100, backgroundColor: 'red'}}
+          onPress={() => FirstBottomSheet.openBottomSheet()}>
+          <Text>Press</Text>
+        </TouchableOpacity>
+      </View>
+      <FirstBottomSheet.BottomSheet sheetSize={'dynamic'}>
+        <View>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+            incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+            voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+            temporibus ullam, vero vitae.
+          </Text>
+        </View>
+      </FirstBottomSheet.BottomSheet>
+    </>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -22,4 +40,4 @@ const styles = StyleSheet.create({
     height: 60,
     marginVertical: 20,
   },
-});
+})

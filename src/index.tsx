@@ -1,12 +1,11 @@
-import { requireNativeComponent, ViewStyle } from 'react-native';
+import {requireNativeComponent, ViewStyle} from 'react-native'
 
 type BottomSheetProps = {
-  color: string;
-  style: ViewStyle;
-};
+  color: string
+  style: ViewStyle
+}
 
-export const BottomSheetViewManager = requireNativeComponent<BottomSheetProps>(
-'BottomSheetView'
-);
+export const BottomSheetViewManager =
+  requireNativeComponent<BottomSheetProps>('BottomSheetView')
 
-export default BottomSheetViewManager;
+export default BottomSheetViewManager
