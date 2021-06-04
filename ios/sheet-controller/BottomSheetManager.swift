@@ -14,6 +14,7 @@ class RCTModalHostShadowVie: RCTShadowView {
         let first = self.reactSubviews()!.first!
         let firstWidth = first.layoutMetrics.frame.width
         let firstHeight = first.layoutMetrics.frame.height
+        debugPrint(firstWidth, firstHeight)
         self.size = CGSize(width: RCTScreenSize().width, height: 10_000_000)
     }
 }

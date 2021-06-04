@@ -11,19 +11,22 @@ export default function App() {
       <View style={styles.container}>
         <TouchableOpacity
           style={{marginTop: 100, backgroundColor: 'red'}}
-          onPress={() => FirstBottomSheet.openBottomSheet()}>
+          onPress={() => {
+            FirstBottomSheet.openBottomSheet()
+            setTimeout(() => {
+              FirstBottomSheet.closeBottomSheet()
+            }, 4000)
+          }}>
           <Text>Press</Text>
         </TouchableOpacity>
       </View>
       <FirstBottomSheet.BottomSheet sheetSize={'dynamic'}>
-        <View>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-            incidunt ipsam iste provident sequi sit soluta vero voluptatibus
-            voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
-            temporibus ullam, vero vitae.
-          </Text>
-        </View>
+        <Text style={{width: 100, height: 300, backgroundColor: 'red'}}>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+          incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+          voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+          temporibus ullam, vero vitae.
+        </Text>
       </FirstBottomSheet.BottomSheet>
     </>
   )

@@ -11,9 +11,8 @@ export const useBottomSheetView = () => {
     const sheetRef = bottomSheetRef.current
     if (!sheetRef) return
     //setBottomSheetVisible(false);
-    console.log('----', ReactNative.findNodeHandle(sheetRef))
     const node = ReactNative.findNodeHandle(sheetRef)
-    const config = UIManager.getViewManagerConfig('BottomSheetView')
+    const config = UIManager.getViewManagerConfig('BottomSheet')
     UIManager.dispatchViewManagerCommand(node, config.Commands.dismissSheet, [])
   }, [])
 
