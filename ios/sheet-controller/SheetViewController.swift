@@ -528,9 +528,6 @@ open class SheetViewController: UIViewController {
     switch (size) {
     case .fixed(let height):
         return height
-            + Self.handleBottomEdgeInset
-            + Self.handleTopEdgeInset
-            + Self.handleSize.height
     case .fullScreen:
       let insets = self.safeAreaInsets
       let additionalOffset: CGFloat = showIpadVersion ? 48 + Self.iPadBottomInset + 16 + 16 : 0

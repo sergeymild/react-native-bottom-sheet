@@ -63,6 +63,9 @@ class BottomSheetScrollView: UIScrollView {
         
       let maxHeight = UIScreen.main.bounds.height - screenSafeArea.top - 20
       let contentHeight = contentSize.height + screenSafeArea.bottom
+        + SheetViewController.handleBottomEdgeInset
+        + SheetViewController.handleTopEdgeInset
+        + SheetViewController.handleSize.height
         
       let adoptedHeight = min(maxHeight, contentHeight)
         
