@@ -13,9 +13,6 @@ export default function App() {
           style={{marginTop: 100, backgroundColor: 'red'}}
           onPress={() => {
             FirstBottomSheet.openBottomSheet()
-            setTimeout(() => {
-              FirstBottomSheet.closeBottomSheet()
-            }, 4000)
           }}>
           <Text>Press</Text>
         </TouchableOpacity>
