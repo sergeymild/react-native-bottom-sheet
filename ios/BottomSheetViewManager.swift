@@ -75,6 +75,11 @@ class BottomSheetView : UIView {
         self?.onDismiss?(nil)
       }
     }
+    
+    deinit {
+        debugPrint("BottomSheetViewManager deinit")
+        sheetController?.closeSheet()
+    }
 }
 
 
