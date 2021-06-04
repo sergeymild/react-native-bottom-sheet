@@ -9,16 +9,6 @@
 import Foundation
 import React
 
-class RCTModalHostShadowVie: RCTShadowView {
-    override func layoutSubviews(with layoutContext: RCTLayoutContext) {
-        let first = self.reactSubviews()!.first!
-        let firstWidth = first.layoutMetrics.frame.width
-        let firstHeight = first.layoutMetrics.frame.height
-        debugPrint(firstWidth, firstHeight)
-        self.size = CGSize(width: RCTScreenSize().width, height: 10_000_000)
-    }
-}
-
 @objc(BottomSheetManager)
 class BottomSheetManager: RCTViewManager {
     override class func requiresMainQueueSetup() -> Bool {

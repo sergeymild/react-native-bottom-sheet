@@ -15,7 +15,8 @@
 		9212B1F0266A472100BBB534 /* SheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B1EB266A472100BBB534 /* SheetViewController.swift */; };
 		9212B1F1266A472100BBB534 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B1EC266A472100BBB534 /* UIViewControllerExtension.swift */; };
 		9212B1F2266A472100BBB534 /* Yalta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B1ED266A472100BBB534 /* Yalta.swift */; };
-		9212B277266A4BC300BBB534 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B276266A4BC300BBB534 /* BottomSheetManager.swift */; };
+		9212B3BF266A5A7D00BBB534 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */; };
+		9212B3E4266A5AFB00BBB534 /* RCTModalHostShadowVie.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +42,9 @@
 		9212B1EB266A472100BBB534 /* SheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetViewController.swift; sourceTree = "<group>"; };
 		9212B1EC266A472100BBB534 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		9212B1ED266A472100BBB534 /* Yalta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Yalta.swift; sourceTree = "<group>"; };
-		9212B276266A4BC300BBB534 /* BottomSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BottomSheetManager.swift; path = "sheet-controller/BottomSheetManager.swift"; sourceTree = "<group>"; };
+		9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetManager.swift; sourceTree = "<group>"; };
+		9212B3C2266A5A8F00BBB534 /* RCTModalHostShadowVie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTModalHostShadowVie.h; sourceTree = "<group>"; };
+		9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTModalHostShadowVie.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* BottomSheet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BottomSheet-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,12 +71,14 @@
 			isa = PBXGroup;
 			children = (
 				9212B1E7266A470400BBB534 /* sheet-controller */,
-				9212B276266A4BC300BBB534 /* BottomSheetManager.swift */,
 				9212B19A266A462300BBB534 /* BottomSheetViewManager.m */,
 				9212B1E4266A470100BBB534 /* BottomSheetScrollView.swift */,
+				9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */,
 				9212B199266A462300BBB534 /* BottomSheet-Bridging-Header.h */,
 				9212B19B266A462300BBB534 /* BottomSheetViewManager.swift */,
 				F4FF95D5245B92E700C19C63 /* BottomSheet-Bridging-Header.h */,
+				9212B3C2266A5A8F00BBB534 /* RCTModalHostShadowVie.h */,
+				9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -150,11 +155,12 @@
 				9212B1F0266A472100BBB534 /* SheetViewController.swift in Sources */,
 				9212B1F2266A472100BBB534 /* Yalta.swift in Sources */,
 				9212B1EE266A472100BBB534 /* InitialTouchPanGestureRecognizer.swift in Sources */,
-				9212B277266A4BC300BBB534 /* BottomSheetManager.swift in Sources */,
 				9212B19C266A462300BBB534 /* BottomSheetViewManager.m in Sources */,
 				9212B1E5266A470100BBB534 /* BottomSheetScrollView.swift in Sources */,
+				9212B3BF266A5A7D00BBB534 /* BottomSheetManager.swift in Sources */,
 				9212B19D266A462300BBB534 /* BottomSheetViewManager.swift in Sources */,
 				9212B1F1266A472100BBB534 /* UIViewControllerExtension.swift in Sources */,
+				9212B3E4266A5AFB00BBB534 /* RCTModalHostShadowVie.m in Sources */,
 				9212B1EF266A472100BBB534 /* SheetSize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,15 +16,18 @@ export default function App() {
           }}>
           <Text>Press</Text>
         </TouchableOpacity>
+
+        <FirstBottomSheet.BottomSheet sheetSize={'dynamic'}>
+          <Text
+            style={{backgroundColor: 'red'}}
+            onLayout={(e) => console.log('---', e.nativeEvent.layout.height)}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+            incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+            voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+            temporibus ullam, vero vitae.
+          </Text>
+        </FirstBottomSheet.BottomSheet>
       </View>
-      <FirstBottomSheet.BottomSheet sheetSize={'dynamic'}>
-        <Text style={{width: 100, height: 300, backgroundColor: 'red'}}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-          incidunt ipsam iste provident sequi sit soluta vero voluptatibus
-          voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
-          temporibus ullam, vero vitae.
-        </Text>
-      </FirstBottomSheet.BottomSheet>
     </>
   )
 }

@@ -1,7 +1,6 @@
 #import "React/RCTViewManager.h"
 #import "React/RCTUIManager.h"
 #import "React/RCTLog.h"
-#import "React/RCTShadowView.h"
 
 @interface RCT_EXTERN_MODULE(BottomSheetManager, RCTViewManager)
 

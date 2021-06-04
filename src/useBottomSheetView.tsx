@@ -22,9 +22,9 @@ export const useBottomSheetView = () => {
         sheetSize={p.sheetSize}
         ref={bottomSheetRef}
         onDismiss={() => setBottomSheetVisible(false)}
-        isVisible={isBottomSheetVisible}>
-        {p.children}
-      </BottomSheetView>
+        isVisible={isBottomSheetVisible}
+        children={p.children}
+      />
     )),
     [bottomSheetRef, isBottomSheetVisible, setBottomSheetVisible],
   )
