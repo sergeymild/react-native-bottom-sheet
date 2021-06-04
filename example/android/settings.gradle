@@ -1,0 +1,6 @@
+rootProject.name = 'BottomSheetExample'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':reactnativebottomsheet'
+project(':reactnativebottomsheet').projectDir = new File(rootProject.projectDir, '../../android')
