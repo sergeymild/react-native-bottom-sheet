@@ -1,20 +1,56 @@
 package com.reactnativebottomsheet
 
-import android.graphics.Color
-import android.view.View
-import com.facebook.react.uimanager.SimpleViewManager
+import com.facebook.react.common.MapBuilder
+import com.facebook.react.uimanager.LayoutShadowNode
 import com.facebook.react.uimanager.ThemedReactContext
+import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
-class BottomSheetViewManager : SimpleViewManager<View>() {
-  override fun getName() = "BottomSheetView"
+class BottomSheetViewManager : ViewGroupManager<CustomSheetChildView>() {
+  override fun getName(): String = "BottomSheet"
+  override fun createViewInstance(reactContext: ThemedReactContext) = CustomSheetChildView(reactContext)
 
-  override fun createViewInstance(reactContext: ThemedReactContext): View {
-    return View(reactContext)
+  override fun onDropViewInstance(view: CustomSheetChildView) {
+    super.onDropViewInstance(view)
+    view.onDropInstance()
   }
 
-  @ReactProp(name = "color")
-  fun setColor(view: View, color: String) {
-    view.setBackgroundColor(Color.parseColor(color))
+  override fun onAfterUpdateTransaction(view: CustomSheetChildView) {
+    super.onAfterUpdateTransaction(view)
+    view.showOrUpdate()
+  }
+
+
+  override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
+    return MapBuilder.builder<String, Any>()
+      .put("onDismiss", MapBuilder.of<String, Any>("phasedRegistrationNames", MapBuilder.of("bubbled", "onDismiss")))
+      .build()
+  }
+
+  @ReactProp(name = "sheetSize")
+  fun sheetSize(view: CustomSheetChildView, size: String) {
+    view.setSheetSize(size)
+  }
+
+  @ReactProp(name = "showHandle")
+  fun showHandle(view: CustomSheetChildView, value: Boolean) {
+    view.setShowHandle(value)
+  }
+
+  @ReactProp(name = "cornerRadius")
+  fun cornerRadius(view: CustomSheetChildView, value: Float) {
+    view.setCornerRadius(value)
+  }
+
+  override fun getCommandsMap(): MutableMap<String, Int> {
+    return MapBuilder.of("dismissSheet", 1)
+  }
+
+  override fun createShadowNodeInstance(): LayoutShadowNode {
+    return ModalHostShadowNode()
+  }
+
+  override fun getShadowNodeClass(): Class<out LayoutShadowNode> {
+    return ModalHostShadowNode::class.java
   }
 }

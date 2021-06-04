@@ -6,6 +6,16 @@ const BottomSheet = requireNativeComponent('BottomSheet')
 interface BottomSheetProps {
   readonly sheetSize: string | 'dynamic' | number
   readonly onDismiss?: () => void
+
+  /**
+   * To show a swipe handle on a top bar
+   *   To see it a [isShowHandleBar] must be true
+   * @default true */
+  readonly showHandle?: boolean
+
+  /** Corner radius of a top bar
+   * @default 0 */
+  readonly cornerRadius?: number
 }
 
 export type PublicBottomSheetProps = PropsWithChildren<BottomSheetProps>
