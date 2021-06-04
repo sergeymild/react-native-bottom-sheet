@@ -37,7 +37,7 @@ class BottomSheetScrollView: UIScrollView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private var sf: UIEdgeInsets {
+  private var screenSafeArea: UIEdgeInsets {
       var inserts = UIEdgeInsets.zero
       if #available(iOS 11.0, *) {
           inserts = UIApplication.shared.keyWindow?.safeAreaInsets ?? inserts
@@ -60,10 +60,15 @@ class BottomSheetScrollView: UIScrollView {
         contentSize = newContentSize
         IQKeyboardManager.shared.reloadLayoutIfNeeded()
       }
-      let totalHeight = UIScreen.main.bounds.height - sf.top - 20
-      let height = min(totalHeight, contentSize.height)
-      if sheetController?.currentHeight != (height + sf.bottom) {
-        sheetController?.setSizes([.fixed(height + sf.bottom)])
+        
+      let maxHeight = UIScreen.main.bounds.height - screenSafeArea.top - 20
+      let contentHeight = contentSize.height + screenSafeArea.bottom
+        
+      let adoptedHeight = min(maxHeight, contentHeight)
+        
+      if sheetController?.currentHeight != adoptedHeight {
+        debugPrint("adopted height", adoptedHeight)
+        sheetController?.setSizes([.fixed(adoptedHeight)])
       }
     }
 //    else if sizeType.starts(with: "fixed:") {
