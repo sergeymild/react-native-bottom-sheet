@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useRef, useState} from 'react'
-import ReactNative, {UIManager} from 'react-native'
+import ReactNative, {StyleSheet, UIManager, View} from 'react-native'
 
 import {BottomSheetView, PublicBottomSheetProps} from './BottomSheet'
 
@@ -19,6 +19,8 @@ export const useBottomSheetView = () => {
   const bottomSheet = useCallback(
     memo((p: PublicBottomSheetProps) => (
       <BottomSheetView
+        //@ts-ignore
+        style={StyleSheet.absoluteFill}
         sheetSize={p.sheetSize}
         ref={bottomSheetRef}
         onDismiss={() => setBottomSheetVisible(false)}
