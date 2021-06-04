@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 
 import {useBottomSheetView} from '../../src/useBottomSheetView'
@@ -10,12 +10,12 @@ export default function App() {
 
   const [text, setText] = useState('Press')
 
-  useEffect(() => {
-    // setTimeout(() => {
-    //   SecondBottomSheet.openBottomSheet()
-    //   setText('Press2')
-    // }, 7000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     SecondBottomSheet.openBottomSheet()
+  //     setText('Press2')
+  //   }, 3000)
+  // }, [])
 
   return (
     <>
@@ -29,7 +29,7 @@ export default function App() {
         </TouchableOpacity>
 
         <FirstBottomSheet.BottomSheet sheetSize={'dynamic'}>
-          <View style={{backgroundColor: 'red'}}>
+          <View style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}>
             <Text
               onLayout={(e) => console.log('---', e.nativeEvent.layout.height)}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius

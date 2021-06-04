@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+  <style name="BottomSheet.Theme" parent="Theme.MaterialComponents.Light.NoActionBar"/>
+
   <style name="AppBottomSheetDialog" parent="Theme.AppCompat.Dialog">
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>

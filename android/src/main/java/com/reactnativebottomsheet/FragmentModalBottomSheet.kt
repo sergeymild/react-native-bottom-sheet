@@ -36,7 +36,7 @@ class FragmentModalBottomSheet : BottomSheetDialogFragment() {
             field = value
             (dialog as SheetDialog?)?.peekHeight = extractPeekHeight(value)
         }
-    var handleRadius: Float = 0F
+    var handleRadius: Float = 12F
         set(value) {
             field = value
             (dialog as SheetDialog?)?.handleRadius = value

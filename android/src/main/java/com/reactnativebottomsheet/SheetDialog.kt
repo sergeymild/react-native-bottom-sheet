@@ -1,16 +1,19 @@
 package com.reactnativebottomsheet
 
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.facebook.react.uimanager.DisplayMetricsHolder
+import com.facebook.react.views.view.ReactViewBackgroundDrawable
+import com.facebook.react.views.view.ReactViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 
 internal class SheetDialog(context: Context, theme: Int) : CustomBottomSheetDialog(context, theme) {
 
-    private val minBarHeightWithHandle = 28 * DisplayMetricsHolder.getScreenDisplayMetrics().density
+    private val minBarHeightWithHandle = 2 * 28 * DisplayMetricsHolder.getScreenDisplayMetrics().density
 
     private var startState: Int = BottomSheetBehavior.STATE_EXPANDED
     private lateinit var handleBar: MaterialCardView
@@ -28,7 +31,7 @@ internal class SheetDialog(context: Context, theme: Int) : CustomBottomSheetDial
             field = value
             setupHandle()
         }
-    var handleRadius: Float = 0F
+    var handleRadius: Float = 12F
         set(value) {
             field = value
             setupHandle()
@@ -73,16 +76,28 @@ internal class SheetDialog(context: Context, theme: Int) : CustomBottomSheetDial
             } else {
                 radius * 2
             }.toInt()
+            contentContainer?.findFirstReactNativeView()?.background?.also {
+                if (it is ReactViewBackgroundDrawable) handleBar.setCardBackgroundColor(it.color)
+            }
             handleBar.radius = handleRadius * DisplayMetricsHolder.getScreenDisplayMetrics().density
             (handleBar.layoutParams as ViewGroup.MarginLayoutParams).also {
                 if (it.height != barHeight) {
                     it.height = barHeight
-                    it.bottomMargin = -barHeight / 2
+                    it.bottomMargin = -(barHeight / 2)
                     handleBar.requestLayout()
                 }
             }
             handleBar.isVisible = showHandleBar
             handle.isVisible = showHandle
         }
+    }
+
+    private fun ViewGroup.findFirstReactNativeView(): View? {
+        if (this is ReactViewGroup) return this
+        var child: ViewGroup? = this
+        do {
+            child = child?.getChildAt(0) as? ViewGroup
+        } while (child != null && child !is ReactViewGroup)
+        return child
     }
 }

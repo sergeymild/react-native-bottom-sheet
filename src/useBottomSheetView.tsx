@@ -22,6 +22,8 @@ export const useBottomSheetView = () => {
         //@ts-ignore
         style={StyleSheet.absoluteFill}
         sheetSize={p.sheetSize}
+        cornerRadius={p.cornerRadius}
+        showHandle={p.showHandle}
         ref={bottomSheetRef}
         onDismiss={() => setBottomSheetVisible(false)}
         isVisible={isBottomSheetVisible}
