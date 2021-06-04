@@ -63,6 +63,9 @@ class BottomSheetView : UIView {
         showIpadVersion: false
       )
       
+      let touchHandler = RCTTouchHandler(bridge: nil /*RCTBridge needed*/)
+      touchHandler?.attach(to: sheetView)
+      
       if sheetWeakRefs.isEmpty { sheetController.overlayColor = .clear }
       sheetWeakRefs.append(SheetWeakRef(sheet: sheetController))
       
