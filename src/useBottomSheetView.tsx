@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useRef, useState} from 'react'
-import ReactNative, {StyleSheet, UIManager, View} from 'react-native'
+import ReactNative, {StyleSheet, UIManager} from 'react-native'
 
 import {BottomSheetView, PublicBottomSheetProps} from './BottomSheet'
 
