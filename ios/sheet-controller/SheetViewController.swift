@@ -19,6 +19,7 @@ open class SheetViewController: UIViewController {
   /// The view that can be pulled to resize a sheeet. This includes the background. To change the color of the bar, use `handleView` instead
   public let pullBarView = UIView()
   public let handleView = UIView()
+  public static let baseOverlayColor = UIColor(white: 0, alpha: 0.7)
   public static let handleColor: UIColor = UIColor(white: 0, alpha: 0.24)
   public static let handleSize: CGSize = CGSize(width: 50, height: 6)
   public static let handleTopEdgeInset: CGFloat = 9
@@ -551,7 +552,7 @@ open class SheetViewController: UIViewController {
       nav.popToRootViewController(animated: false)
       nav.viewControllers = []
     }
-    debugPrint("----== DEINIT")
+    debugPrint("SheetViewController deinit")
   }
 }
 

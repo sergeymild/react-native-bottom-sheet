@@ -31,6 +31,7 @@ class CustomSheetChildView(context: Context) : ViewGroup(context), LifecycleEven
     fun setSheetSize(size: String) {
         val fragment = sheet
         if (fragment != null) {
+          //throw RuntimeException("can't set peekHeight, bottomSheet already present")
             fragment.peekHeight = size
         } else {
             pendingPeekHeight = size

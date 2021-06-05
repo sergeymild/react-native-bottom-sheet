@@ -83,6 +83,6 @@ class BottomSheetScrollView: UIScrollView {
   
   deinit {
     subviews[0].removeFromSuperview()
-    debugPrint("deini=-")
+    debugPrint("BottomSheetScrollView deinit")
   }
 }

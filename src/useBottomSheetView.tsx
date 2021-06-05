@@ -20,12 +20,15 @@ export const useBottomSheetView = () => {
     memo((p: PublicBottomSheetProps) => (
       <BottomSheetView
         //@ts-ignore
-        style={StyleSheet.absoluteFill}
+        style={[StyleSheet.absoluteFill]}
         sheetSize={p.sheetSize}
         cornerRadius={p.cornerRadius}
         showHandle={p.showHandle}
         ref={bottomSheetRef}
-        onDismiss={() => setBottomSheetVisible(false)}
+        onDismiss={() => {
+          console.log('js onDismiss')
+          setBottomSheetVisible(false)
+        }}
         isVisible={isBottomSheetVisible}
         children={p.children}
       />

@@ -46,11 +46,11 @@ class BottomSheetViewManager : ViewGroupManager<CustomSheetChildView>() {
     return MapBuilder.of("dismissSheet", 1)
   }
 
-  override fun createShadowNodeInstance(): LayoutShadowNode {
-    return ModalHostShadowNode()
-  }
-
-  override fun getShadowNodeClass(): Class<out LayoutShadowNode> {
-    return ModalHostShadowNode::class.java
-  }
+//  override fun createShadowNodeInstance(): LayoutShadowNode {
+//    return ModalHostShadowNode()
+//  }
+//
+//  override fun getShadowNodeClass(): Class<out LayoutShadowNode> {
+//    return ModalHostShadowNode::class.java
+//  }
 }

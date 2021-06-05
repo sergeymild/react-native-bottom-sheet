@@ -8,7 +8,7 @@ export default function App() {
   const FirstBottomSheet = useBottomSheetView()
   const SecondBottomSheet = useBottomSheetView()
 
-  const [text, setText] = useState('Press')
+  const [text, setText] = useState('dynamic')
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -28,15 +28,41 @@ export default function App() {
           <Text>{text}</Text>
         </TouchableOpacity>
 
-        <FirstBottomSheet.BottomSheet sheetSize={'dynamic'}>
+        <FirstBottomSheet.BottomSheet sheetSize={'20%'} cornerRadius={20}>
           <View style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}>
-            <Text
-              onLayout={(e) => console.log('---', e.nativeEvent.layout.height)}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-              incidunt ipsam iste provident sequi sit soluta vero voluptatibus
-              voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
-              temporibus ullam, vero vitae.
-            </Text>
+            <TouchableOpacity onPress={() => setText('20%')}>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>Last</Text>
+            </TouchableOpacity>
           </View>
         </FirstBottomSheet.BottomSheet>
 

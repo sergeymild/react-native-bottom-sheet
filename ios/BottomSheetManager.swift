@@ -15,12 +15,12 @@ class BottomSheetManager: RCTViewManager {
         return true
     }
 
-    override func shadowView() -> RCTShadowView! {
-        return RCTModalHostShadowVie()
-    }
+//    override func shadowView() -> RCTShadowView! {
+//        return RCTModalHostShadowVie()
+//    }
     
     override func view() -> UIView! {
-        return BottomSheetView()
+        return BottomSheetView(frame: .zero, bridge: bridge)
     }
     
     @objc
