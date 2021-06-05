@@ -1,3 +1,6 @@
+import UIKit
+import React
+
 @objc(BottomSheetView)
 class BottomSheetView : UIView {
     
