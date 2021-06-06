@@ -18,8 +18,8 @@ class BottomSheetScrollView: UIScrollView {
       case "fullScreen": sheetController?.setSizes([.fullScreen])
       case "halfScreen": sheetController?.setSizes([.halfScreen])
       default:
-        let parts = sizeType.split(separator: ":")
-        sheetController?.setSizes([.fixed(CGFloat(Float(parts[1])!))])
+        let parts = sizeType.split(separator: "%")
+        sheetController?.setSizes([.fixed(CGFloat(Float(parts[0])!))])
       }
     }
   }
