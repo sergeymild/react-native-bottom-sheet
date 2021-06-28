@@ -1,8 +1,6 @@
 import {
-  BottomSheet,
-  PublicBottomSheetProps,
-  UseBottomSheet,
-  UseBottomSheetView,
+  UseBottomSheet as BottomSheetModalType,
+  UseBottomSheetView as BottomSheetModal,
 } from './useBottomSheetView'
 
-export {UseBottomSheetView, UseBottomSheet, BottomSheet, PublicBottomSheetProps}
+export {BottomSheetModal, BottomSheetModalType}

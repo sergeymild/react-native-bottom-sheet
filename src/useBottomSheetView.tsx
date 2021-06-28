@@ -1,13 +1,7 @@
 import React, {createRef, PropsWithChildren, PureComponent} from 'react'
-import ReactNative, {
-  requireNativeComponent,
-  StyleSheet,
-  UIManager,
-} from 'react-native'
+import ReactNative, {StyleSheet, UIManager} from 'react-native'
 
-export const BottomSheet = requireNativeComponent('BottomSheet')
-const config = UIManager.getViewManagerConfig('BottomSheet')
-const dismissSheetCommand = config.Commands.dismissSheet
+import {BottomSheetViewManager, getViewManagerConfig} from './BottomSheetNative'
 
 interface State {
   readonly isVisible: boolean
@@ -33,6 +27,7 @@ export class UseBottomSheetView extends PureComponent<
   PublicBottomSheetProps,
   State
 > {
+  private dismissSheetCommand = getViewManagerConfig().Commands.dismissSheet
   private sheetRef = createRef<any>()
   constructor(props: PublicBottomSheetProps) {
     super(props)
@@ -51,13 +46,13 @@ export class UseBottomSheetView extends PureComponent<
     if (!sheetRef) return
     //setBottomSheetVisible(false);
     const node = ReactNative.findNodeHandle(sheetRef)
-    UIManager.dispatchViewManagerCommand(node, dismissSheetCommand, [])
+    UIManager.dispatchViewManagerCommand(node, this.dismissSheetCommand, [])
   }
 
   render() {
     if (!this.state.isVisible) return null
     return (
-      <BottomSheet
+      <BottomSheetViewManager
         //@ts-ignore
         style={[StyleSheet.absoluteFill]}
         sheetSize={this.props.sheetSize?.toString()}
