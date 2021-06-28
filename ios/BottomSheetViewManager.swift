@@ -9,10 +9,12 @@ class BottomSheetView : UIView {
     private weak var _reactSubview: RCTView?
     
     @objc
-    private var sheetSize: String = "dynamic"
-    
+    private var sheetSize = "dynamic"
     @objc
-    var onDismiss: RCTBubblingEventBlock?
+    private var useScrollView = true
+    @objc
+    private var onDismiss: RCTBubblingEventBlock?
+    
     private weak var sheetController: SheetViewController?
     
     init(frame: CGRect, bridge: RCTBridge) {
@@ -21,35 +23,35 @@ class BottomSheetView : UIView {
         debugPrint("init", self)
         alpha = 0
     }
-
+    
     @objc
     private var cornerRadius: Double = 12 {
-      didSet {
-        sheetController?.topCornersRadius = CGFloat(cornerRadius)
-      }
+        didSet {
+            sheetController?.topCornersRadius = CGFloat(cornerRadius)
+        }
     }
     
     @objc
     func dismissSheet() {
-      sheetController?.closeSheet(completion: { [weak self] in
-        self?.sheetController = nil
-      })
+        sheetController?.closeSheet(completion: { [weak self] in
+            self?.sheetController = nil
+        })
     }
     
     required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func addSubview(_ view: UIView) {
-      //super.addSubview(view)
+        //super.addSubview(view)
         debugPrint("addSubview", _reactSubview, view, sheetView, sheetController)
         
-      if _reactSubview != nil { fatalError("Modal view can only have one subview") }
-      _reactSubview = view as? RCTView
+        if _reactSubview != nil { fatalError("Modal view can only have one subview") }
+        _reactSubview = view as? RCTView
         
-      if sheetController == nil, let v = _reactSubview {
-          self.present(v)
-      }
+        if sheetController == nil, let v = _reactSubview {
+            self.present(v)
+        }
         debugPrint("addSubview", self, sheetView)
     }
     
@@ -63,42 +65,47 @@ class BottomSheetView : UIView {
     }
     
     override func layoutSubviews() {
-      super.layoutSubviews()
-      frame = .zero
+        super.layoutSubviews()
+        frame = .zero
     }
     
     
     func present(_ view: UIView) {
-      let v = view
-      let controller = UIViewController()
-      let sheetView = BottomSheetScrollView(child: v, sizeType: sheetSize)
-      controller.view = sheetView
-      self.sheetView = sheetView
-
-      let sheetController = SheetViewController(
-        controller: controller,
-        sizes: [.fixed(1)],
-        showIpadVersion: false
-      )
-
-      touchHandler.attach(to: sheetView)
-      
-      sheetWeakRefs.last?.sheet?.overlayColor = .clear
-      sheetWeakRefs.append(SheetWeakRef(sheet: sheetController))
-      
-      sheetController.topCornersRadius = CGFloat(cornerRadius)
-      sheetController.adjustForBottomSafeArea = true
-      sheetController.extendBackgroundBehindHandle = false
-      
-      sheetView.sheetController = sheetController
-      topPresentingController.present(sheetController, animated: false)
-      self.sheetController = sheetController
-      sheetController.didDismiss = { [weak self] _ in
-        debugPrint("didDismiss")
-        self?.onDismiss?(nil)
-        sheetWeakRefs.removeLast()
-        sheetWeakRefs.last?.sheet?.overlayColor = SheetViewController.baseOverlayColor
-      }
+        let v = view
+        let controller = UIViewController()
+        let sheetView = BottomSheetScrollView(
+            child: v,
+            sizeType: sheetSize,
+            useScrollView: useScrollView
+        )
+        controller.view = sheetView
+        self.sheetView = sheetView
+        
+        let sheetController = SheetViewController(
+            controller: controller,
+            sizes: [.fixed(1)],
+            showIpadVersion: false
+        )
+        
+        touchHandler.attach(to: sheetView)
+        
+        sheetWeakRefs.last?.sheet?.overlayColor = .clear
+        sheetWeakRefs.append(SheetWeakRef(sheet: sheetController))
+        
+        sheetController.topCornersRadius = CGFloat(cornerRadius)
+        sheetController.adjustForBottomSafeArea = true
+        sheetController.extendBackgroundBehindHandle = false
+        sheetController.shouldShowHandleView = false
+        
+        sheetView.sheetController = sheetController
+        topPresentingController.present(sheetController, animated: false)
+        self.sheetController = sheetController
+        sheetController.didDismiss = { [weak self] _ in
+            debugPrint("didDismiss")
+            self?.onDismiss?(nil)
+            sheetWeakRefs.removeLast()
+            sheetWeakRefs.last?.sheet?.overlayColor = SheetViewController.baseOverlayColor
+        }
     }
     
     deinit {
@@ -113,25 +120,25 @@ struct SheetWeakRef {
 var sheetWeakRefs: [SheetWeakRef] = []
 
 var topPresentingController: UIViewController {
-  return UIApplication.shared.keyWindow!.rootViewController!.topViewController()
+    return UIApplication.shared.keyWindow!.rootViewController!.topViewController()
 }
 
 extension UIViewController {
-  
-  func topViewController() -> UIViewController {
-    topViewController(rootViewController: self)
-  }
-
-  func topViewController(rootViewController: UIViewController) -> UIViewController {
     
-    guard let pvc = rootViewController.presentedViewController else {
-      return rootViewController
+    func topViewController() -> UIViewController {
+        topViewController(rootViewController: self)
     }
     
-    if let nvc = pvc as? UINavigationController {
-      return topViewController(rootViewController: nvc.topViewController!)
+    func topViewController(rootViewController: UIViewController) -> UIViewController {
+        
+        guard let pvc = rootViewController.presentedViewController else {
+            return rootViewController
+        }
+        
+        if let nvc = pvc as? UINavigationController {
+            return topViewController(rootViewController: nvc.topViewController!)
+        }
+        
+        return topViewController(rootViewController: pvc)
     }
-    
-    return topViewController(rootViewController: pvc)
-  }
 }

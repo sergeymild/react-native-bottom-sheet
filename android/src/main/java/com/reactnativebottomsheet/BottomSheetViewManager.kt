@@ -32,9 +32,9 @@ class BottomSheetViewManager : ViewGroupManager<CustomSheetChildView>() {
     view.setSheetSize(size)
   }
 
-  @ReactProp(name = "showHandle")
-  fun showHandle(view: CustomSheetChildView, value: Boolean) {
-    view.setShowHandle(value)
+  @ReactProp(name = "useScrollView")
+  fun useScrollView(view: CustomSheetChildView, value: Boolean) {
+    view.useScrollView(value)
   }
 
   @ReactProp(name = "cornerRadius")

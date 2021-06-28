@@ -2,9 +2,7 @@
   "name": "react-native-bottom-sheet",
   "version": "0.1.0",
   "description": "Bottom sheet dialog implementations for React Native",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
-  "types": "lib/index.d.ts",
+  "main": "src/index.tsx",
   "files": [
     "!src",
     "lib",

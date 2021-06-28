@@ -72,10 +72,10 @@
 			children = (
 				9212B1E7266A470400BBB534 /* sheet-controller */,
 				9212B19A266A462300BBB534 /* BottomSheetViewManager.m */,
-				9212B1E4266A470100BBB534 /* BottomSheetScrollView.swift */,
-				9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */,
-				9212B199266A462300BBB534 /* BottomSheet-Bridging-Header.h */,
 				9212B19B266A462300BBB534 /* BottomSheetViewManager.swift */,
+				9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */,
+				9212B1E4266A470100BBB534 /* BottomSheetScrollView.swift */,
+				9212B199266A462300BBB534 /* BottomSheet-Bridging-Header.h */,
 				F4FF95D5245B92E700C19C63 /* BottomSheet-Bridging-Header.h */,
 				9212B3C2266A5A8F00BBB534 /* RCTModalHostShadowVie.h */,
 				9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */,

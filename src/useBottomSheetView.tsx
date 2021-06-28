@@ -16,12 +16,10 @@ interface State {
 interface BottomSheetProps {
   readonly sheetSize?: string | 'dynamic' | number
   readonly onDismiss?: () => void
-  readonly useNestedScrollView?: boolean
   /**
-   * To show a swipe handle on a top bar
-   *   To see it a [isShowHandleBar] must be true
+   * Whenever use or not nested scrollView
    * @default true */
-  readonly showHandle?: boolean
+  readonly useScrollView?: boolean
 
   /** Corner radius of a top bar
    * @default 0 */
@@ -64,8 +62,7 @@ export class UseBottomSheetView extends PureComponent<
         style={[StyleSheet.absoluteFill]}
         sheetSize={this.props.sheetSize?.toString()}
         cornerRadius={this.props.cornerRadius}
-        showHandle={this.props.showHandle}
-        useNestedScrollView={this.props.useNestedScrollView}
+        useScrollView={this.props.useScrollView}
         ref={this.sheetRef}
         onDismiss={() => this.setState({isVisible: false})}
         isVisible={this.state.isVisible}

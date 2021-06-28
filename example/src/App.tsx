@@ -1,8 +1,7 @@
 import * as React from 'react'
 import {useRef, useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import type {UseBottomSheet} from 'react-native-bottom-sheet'
-import {UseBottomSheetView} from 'react-native-bottom-sheet'
+import {UseBottomSheet, UseBottomSheetView} from 'react-native-bottom-sheet'
 
 export default function App() {
   const first = useRef<UseBottomSheet>(null)
@@ -28,9 +27,102 @@ export default function App() {
           <Text>{text}</Text>
         </TouchableOpacity>
 
-        <UseBottomSheetView ref={first} sheetSize={'dynamic'} cornerRadius={20}>
+        <UseBottomSheetView
+          ref={first}
+          sheetSize={'dynamic'}
+          useScrollView={true}>
           <View style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}>
-            <TouchableOpacity onPress={() => setText('20%')}>
+            <View>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
+                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+              </Text>
               <Text>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
                 incidunt ipsam iste provident sequi sit soluta vero voluptatibus
@@ -62,7 +154,7 @@ export default function App() {
                 temporibus ullam, vero vitae.
               </Text>
               <Text>Last</Text>
-            </TouchableOpacity>
+            </View>
           </View>
         </UseBottomSheetView>
 
