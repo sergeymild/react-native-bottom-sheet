@@ -12,6 +12,7 @@
     "android",
     "ios",
     "cpp",
+    "!node_modules",
     "react-native-bottom-sheet.podspec",
     "!.cicircle",
     "!example",
