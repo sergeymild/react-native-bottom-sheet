@@ -1,5 +1,5 @@
 import React, {createRef, PropsWithChildren, PureComponent} from 'react'
-import ReactNative, {StyleSheet, UIManager} from 'react-native'
+import ReactNative, { Dimensions, StyleSheet, UIManager, View } from 'react-native';
 
 import {BottomSheetViewManager, getViewManagerConfig} from './BottomSheetNative'
 
@@ -23,6 +23,17 @@ interface BottomSheetProps {
 export type PublicBottomSheetProps = PropsWithChildren<BottomSheetProps>
 
 export type UseBottomSheet = UseBottomSheetView
+
+
+export const getHeightFromPercent = (percent?: string | number) => {
+  if (!percent) return percent
+  if (typeof percent !== 'string') return percent
+  if (!percent.endsWith('%')) return parseInt(percent, 10)
+  const percentInt = parseInt(percent.replace('%', ''), 10)
+  const height = Dimensions.get('window').height
+  return height - height * ((100 - percentInt) / 100.0)
+}
+
 export class UseBottomSheetView extends PureComponent<
   PublicBottomSheetProps,
   State
@@ -58,6 +69,18 @@ export class UseBottomSheetView extends PureComponent<
 
   render() {
     if (!this.state.isVisible) return null
+
+    if (React.Children.count(this.props.children) !== 1) {
+      throw new Error(`Only one child must be specified`)
+    }
+
+    let children = React.Children.only(this.props.children)
+    if (this.props.sheetSize !== 'dynamic') {
+      children = <View style={{height: getHeightFromPercent(this.props.sheetSize)}}>
+        {React.Children.only(this.props.children)}
+      </View>
+    }
+
     return (
       <BottomSheetViewManager
         //@ts-ignore
@@ -68,7 +91,7 @@ export class UseBottomSheetView extends PureComponent<
         ref={this.sheetRef}
         onDismiss={() => this.setState({isVisible: false})}
         isVisible={this.state.isVisible}
-        children={React.Children.only(this.props.children)}
+        children={children}
       />
     )
   }
