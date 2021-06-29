@@ -1,5 +1,10 @@
 import React, {createRef, PropsWithChildren, PureComponent} from 'react'
-import ReactNative, { Dimensions, StyleSheet, UIManager, View } from 'react-native';
+import ReactNative, {
+  Dimensions,
+  StyleSheet,
+  UIManager,
+  View,
+} from 'react-native'
 
 import {BottomSheetViewManager, getViewManagerConfig} from './BottomSheetNative'
 
@@ -24,8 +29,7 @@ export type PublicBottomSheetProps = PropsWithChildren<BottomSheetProps>
 
 export type UseBottomSheet = UseBottomSheetView
 
-
-export const getHeightFromPercent = (percent?: string | number) => {
+const getHeightFromPercent = (percent?: string | number) => {
   if (!percent) return percent
   if (typeof percent !== 'string') return percent
   if (!percent.endsWith('%')) return parseInt(percent, 10)
@@ -67,6 +71,8 @@ export class UseBottomSheetView extends PureComponent<
     if (prevState.isVisible && !this.state.isVisible) this.props.onDismiss?.()
   }
 
+  private _onDismiss = () => this.setState({isVisible: false})
+
   render() {
     if (!this.state.isVisible) return null
 
@@ -76,9 +82,11 @@ export class UseBottomSheetView extends PureComponent<
 
     let children = React.Children.only(this.props.children)
     if (this.props.sheetSize !== 'dynamic') {
-      children = <View style={{height: getHeightFromPercent(this.props.sheetSize)}}>
-        {React.Children.only(this.props.children)}
-      </View>
+      children = (
+        <View style={{height: getHeightFromPercent(this.props.sheetSize)}}>
+          {React.Children.only(this.props.children)}
+        </View>
+      )
     }
 
     return (
@@ -89,7 +97,7 @@ export class UseBottomSheetView extends PureComponent<
         cornerRadius={this.props.cornerRadius}
         useScrollView={this.props.useScrollView}
         ref={this.sheetRef}
-        onDismiss={() => this.setState({isVisible: false})}
+        onDismiss={this._onDismiss}
         isVisible={this.state.isVisible}
         children={children}
       />
