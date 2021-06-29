@@ -18,8 +18,16 @@ class BottomSheetScrollView: UIScrollView {
             case "fullScreen": sheetController?.setSizes([.fullScreen])
             case "halfScreen": sheetController?.setSizes([.halfScreen])
             default:
-                let parts = sizeType.split(separator: "%")
-                sheetController?.setSizes([.fixed(CGFloat(Float(parts[0])!))])
+                
+                if let fixedHeight = Int(sizeType) {
+                    sheetController?.setSizes([.fixed(CGFloat(fixedHeight))])
+                    return
+                }
+                
+                guard sizeType.hasSuffix("%") else { fatalError("Incorrect sizeType format") }
+                let percentage = Int(String(sizeType.dropLast()))!
+                let height = UIScreen.main.bounds.height * CGFloat(percentage) / 100
+                sheetController?.setSizes([.fixed(height)])
             }
         }
     }
@@ -39,42 +47,44 @@ class BottomSheetScrollView: UIScrollView {
     }
     
     private var screenSafeArea: UIEdgeInsets {
-        var inserts = UIEdgeInsets.zero
+        var insets = UIEdgeInsets.zero
         if #available(iOS 11.0, *) {
-            inserts = UIApplication.shared.keyWindow?.safeAreaInsets ?? inserts
+            insets = UIApplication.shared.keyWindow?.safeAreaInsets ?? insets
         }
-        inserts.top = max(inserts.top, 20)
-        return inserts
+        insets.top = max(insets.top, 20)
+        return insets
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         backgroundColor = subviews[0].backgroundColor
         sheetController?.containerView.backgroundColor = backgroundColor
-        if sizeType == "dynamic" {
-            let newContentSize = CGSize(
-                width: frame.width,
-                height: subviews[0].frame.height
-            )
-            if contentSize != newContentSize {
-                debugPrint("New content size", subviews[0].frame.height)
-                contentSize = newContentSize
-                IQKeyboardManager.shared.reloadLayoutIfNeeded()
-            }
-            
-            let maxHeight = UIScreen.main.bounds.height - screenSafeArea.top - 20
-            let contentHeight = contentSize.height + screenSafeArea.bottom
-                + SheetViewController.handleBottomEdgeInset
-                + SheetViewController.handleTopEdgeInset
-                + SheetViewController.handleSize.height
-            
-            let adoptedHeight = min(maxHeight, contentHeight)
-            
-            if sheetController?.currentHeight != adoptedHeight {
-                debugPrint("adopted height", adoptedHeight)
-                sheetController?.setSizes([.fixed(adoptedHeight)])
-            }
+        
+        guard sizeType == "dynamic" else { return }
+        
+        let newContentSize = CGSize(
+            width: frame.width,
+            height: subviews[0].frame.height
+        )
+        if contentSize != newContentSize {
+            debugPrint("New content size", subviews[0].frame.height)
+            contentSize = newContentSize
+            IQKeyboardManager.shared.reloadLayoutIfNeeded()
         }
+        
+        let maxHeight = UIScreen.main.bounds.height - screenSafeArea.top - 20
+        let contentHeight = contentSize.height + screenSafeArea.bottom
+            + SheetViewController.handleBottomEdgeInset
+            + SheetViewController.handleTopEdgeInset
+            + SheetViewController.handleSize.height
+        
+        let adoptedHeight = min(maxHeight, contentHeight)
+        
+        if sheetController?.currentHeight != adoptedHeight {
+            debugPrint("adopted height", adoptedHeight)
+            sheetController?.setSizes([.fixed(adoptedHeight)])
+        }
+        
         //    else if sizeType.starts(with: "fixed:") {
         //     let parts = sizeType.split(separator: ":")
         //     frame.size.height = CGFloat(Float(parts[1])!)
