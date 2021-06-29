@@ -49,6 +49,13 @@ export class UseBottomSheetView extends PureComponent<
     UIManager.dispatchViewManagerCommand(node, this.dismissSheetCommand, [])
   }
 
+  componentDidUpdate(
+    _prevProps: Readonly<PublicBottomSheetProps>,
+    prevState: Readonly<State>,
+  ) {
+    if (prevState.isVisible && !this.state.isVisible) this.props.onDismiss?.()
+  }
+
   render() {
     if (!this.state.isVisible) return null
     return (

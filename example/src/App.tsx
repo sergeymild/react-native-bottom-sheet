@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {useRef, useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {UseBottomSheet, UseBottomSheetView} from 'react-native-bottom-sheet'
+import {BottomSheetModal, BottomSheetModalType} from 'react-native-bottom-sheet'
 
 export default function App() {
-  const first = useRef<UseBottomSheet>(null)
-  const second = useRef<UseBottomSheet>(null)
+  const first = useRef<BottomSheetModalType>(null)
+  const second = useRef<BottomSheetModalType>(null)
 
   const [text, setText] = useState('dynamic')
 
@@ -27,9 +27,10 @@ export default function App() {
           <Text>{text}</Text>
         </TouchableOpacity>
 
-        <UseBottomSheetView
+        <BottomSheetModal
           ref={first}
           sheetSize={'dynamic'}
+          onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
           useScrollView={true}>
           <View style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}>
             <View>
@@ -156,9 +157,9 @@ export default function App() {
               <Text>Last</Text>
             </View>
           </View>
-        </UseBottomSheetView>
+        </BottomSheetModal>
 
-        <UseBottomSheetView ref={second} sheetSize={'dynamic'}>
+        <BottomSheetModal ref={second} sheetSize={'dynamic'}>
           <View style={{backgroundColor: 'yellow'}}>
             <Text
               onLayout={(e) => console.log('---', e.nativeEvent.layout.height)}>
@@ -166,7 +167,7 @@ export default function App() {
               incidunt ipsam iste provident sequi sit soluta vero voluptatibus
             </Text>
           </View>
-        </UseBottomSheetView>
+        </BottomSheetModal>
       </View>
     </>
   )
