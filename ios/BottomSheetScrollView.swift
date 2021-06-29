@@ -60,7 +60,14 @@ class BottomSheetScrollView: UIScrollView {
         backgroundColor = subviews[0].backgroundColor
         sheetController?.containerView.backgroundColor = backgroundColor
         
-        guard sizeType == "dynamic" else { return }
+        guard sizeType == "dynamic" else {
+            let subview = subviews[0]
+            subview.accessibilityLabel = "primaryParent"
+            subview.frame.size = self.frame.size
+            subview.setNeedsLayout()
+            subview.layoutIfNeeded()
+            return
+        }
         
         let newContentSize = CGSize(
             width: frame.width,
