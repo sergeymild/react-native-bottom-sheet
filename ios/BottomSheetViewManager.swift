@@ -93,7 +93,6 @@ class BottomSheetView : UIView {
         sheetWeakRefs.append(SheetWeakRef(sheet: sheetController))
         
         sheetController.topCornersRadius = CGFloat(cornerRadius)
-        sheetController.adjustForBottomSafeArea = true
         sheetController.extendBackgroundBehindHandle = false
         sheetController.shouldShowHandleView = false
         
