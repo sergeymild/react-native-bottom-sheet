@@ -78,17 +78,9 @@ export class UseBottomSheetView extends PureComponent<
   render() {
     if (!this.state.isVisible) return null
 
+    const count = React.Children.count(this.props.children)
     if (React.Children.count(this.props.children) !== 1) {
-      throw new Error(`Only one child must be specified`)
-    }
-
-    let children = React.Children.only(this.props.children)
-    if (this.props.sheetSize !== 'dynamic') {
-      children = (
-        <View style={{height: getHeightFromPercent(this.props.sheetSize)}}>
-          {React.Children.only(this.props.children)}
-        </View>
-      )
+      throw new Error(`There must be only one child, passed: ${count}`)
     }
 
     return (
@@ -102,7 +94,7 @@ export class UseBottomSheetView extends PureComponent<
         ref={this.sheetRef}
         onDismiss={this._onDismiss}
         isVisible={this.state.isVisible}
-        children={children}
+        children={React.Children.only(this.props.children)}
       />
     )
   }
