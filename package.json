@@ -22,15 +22,7 @@
     "!**/__fixtures__",
     "!**/__mocks__"
   ],
-  "scripts": {
-    "test": "jest",
-    "typescript": "tsc --noEmit",
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "example": "yarn --cwd example",
-    "build": "yarn tsc",
-    "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
-  },
+  "scripts": {},
   "keywords": [
     "react-native",
     "ios",
@@ -66,5 +58,8 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
+  },
+  "dependencies": {
+    "@gorhom/portal": "^1.0.7"
   }
 }

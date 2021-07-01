@@ -1,10 +1,5 @@
 import React, {createRef, PropsWithChildren, PureComponent} from 'react'
-import ReactNative, {
-  Dimensions,
-  StyleSheet,
-  UIManager,
-  View,
-} from 'react-native'
+import ReactNative, {StyleSheet, UIManager} from 'react-native'
 
 import {BottomSheetViewManager, getViewManagerConfig} from './BottomSheetNative'
 
@@ -30,15 +25,6 @@ interface BottomSheetProps {
 export type PublicBottomSheetProps = PropsWithChildren<BottomSheetProps>
 
 export type UseBottomSheet = UseBottomSheetView
-
-const getHeightFromPercent = (percent?: string | number) => {
-  if (!percent) return percent
-  if (typeof percent !== 'string') return percent
-  if (!percent.endsWith('%')) return parseInt(percent, 10)
-  const percentInt = parseInt(percent.replace('%', ''), 10)
-  const height = Dimensions.get('window').height
-  return height - height * ((100 - percentInt) / 100.0)
-}
 
 export class UseBottomSheetView extends PureComponent<
   PublicBottomSheetProps,
