@@ -1,5 +1,6 @@
 package com.reactnativebottomsheet
 
+import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.LayoutShadowNode
 import com.facebook.react.uimanager.ThemedReactContext
@@ -46,11 +47,9 @@ class BottomSheetViewManager : ViewGroupManager<CustomSheetChildView>() {
     return MapBuilder.of("dismissSheet", 1)
   }
 
-  override fun createShadowNodeInstance(): LayoutShadowNode {
-    return ModalHostShadowNode()
-  }
+  override fun createShadowNodeInstance(context: ReactApplicationContext): LayoutShadowNode =
+    ModalHostShadowNode(context)
 
-  override fun getShadowNodeClass(): Class<out LayoutShadowNode> {
-    return ModalHostShadowNode::class.java
-  }
+  override fun getShadowNodeClass(): Class<out LayoutShadowNode> =
+    ModalHostShadowNode::class.java
 }
