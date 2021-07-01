@@ -27,26 +27,26 @@ export default function App() {
         </TouchableOpacity>
 
         {/*<View style={styles.box}>*/}
-          <BottomSheetModal
-            ref={first}
-            onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
-            useScrollView={false}
-            applyBottomSafeArea={true}>
-            <View
-              style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}
-              accessibilityLabel={'bottomSheetChild'}>
-              <View>
-                <Text>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-                  temporibus ullam, vero vitae. Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit. Eius temporibus ullam, vero
-                  vitae. Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit. Eius temporibus ullam, vero vitae.
-                </Text>
-                <Text>Last</Text>
-              </View>
+        <BottomSheetModal
+          ref={first}
+          onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
+          useScrollView={false}
+          applyBottomSafeArea={true}>
+          <View
+            style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}
+            accessibilityLabel={'bottomSheetChild'}>
+            <View>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                temporibus ullam, vero vitae. Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Eius temporibus ullam, vero vitae.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                temporibus ullam, vero vitae.
+              </Text>
+              <Text>Last</Text>
             </View>
-          </BottomSheetModal>
+          </View>
+        </BottomSheetModal>
         {/*</View>*/}
       </View>
     </>
