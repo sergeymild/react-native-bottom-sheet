@@ -13,8 +13,12 @@ import com.facebook.react.uimanager.ReactShadowNode
 internal class ModalHostShadowNode : LayoutShadowNode() {
     override fun calculateLayoutOnChildren(): MutableIterable<ReactShadowNode<ReactShadowNode<*>>> {
         val result = super.calculateLayoutOnChildren()
-        // this hack allows react native nested views grows as mach as they wants
-        setStyleHeight(PixelUtil.toDIPFromPixel(10_000_000f))
+        setStyleHeight(Resources.getSystem().displayMetrics.heightPixels.toFloat())
         return result
+    }
+
+    init {
+        // todo support widescreen
+        setStyleWidth(Resources.getSystem().displayMetrics.widthPixels.toFloat())
     }
 }
