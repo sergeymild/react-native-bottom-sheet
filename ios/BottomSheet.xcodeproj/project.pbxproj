@@ -17,7 +17,6 @@
 		9212B1F2266A472100BBB534 /* Yalta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B1ED266A472100BBB534 /* Yalta.swift */; };
 		9212B3BF266A5A7D00BBB534 /* BottomSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */; };
 		9212B3E4266A5AFB00BBB534 /* RCTModalHostShadowVie.m in Sources */ = {isa = PBXBuildFile; fileRef = 9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */; };
-		9222836A268B521E00335796 /* DataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 92228369268B521E00335796 /* DataClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,8 +44,6 @@
 		9212B3BE266A5A7D00BBB534 /* BottomSheetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheetManager.swift; sourceTree = "<group>"; };
 		9212B3C2266A5A8F00BBB534 /* RCTModalHostShadowVie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTModalHostShadowVie.h; sourceTree = "<group>"; };
 		9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTModalHostShadowVie.m; sourceTree = "<group>"; };
-		92228368268B521E00335796 /* DataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataClass.h; sourceTree = "<group>"; };
-		92228369268B521E00335796 /* DataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataClass.m; sourceTree = "<group>"; };
 		9222836B268B523E00335796 /* BottomSheet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BottomSheet-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,8 +76,6 @@
 				9212B1E4266A470100BBB534 /* BottomSheetScrollView.swift */,
 				9212B3C2266A5A8F00BBB534 /* RCTModalHostShadowVie.h */,
 				9212B3E3266A5AFB00BBB534 /* RCTModalHostShadowVie.m */,
-				92228368268B521E00335796 /* DataClass.h */,
-				92228369268B521E00335796 /* DataClass.m */,
 				9222836B268B523E00335796 /* BottomSheet-Bridging-Header.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
@@ -155,7 +150,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9222836A268B521E00335796 /* DataClass.m in Sources */,
 				9212B1F0266A472100BBB534 /* SheetViewController.swift in Sources */,
 				9212B1F2266A472100BBB534 /* Yalta.swift in Sources */,
 				9212B1EE266A472100BBB534 /* InitialTouchPanGestureRecognizer.swift in Sources */,

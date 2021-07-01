@@ -29,15 +29,17 @@ export default function App() {
 
         <BottomSheetModal
           ref={first}
-          sheetSize={300}
           onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
-          useScrollView={true}>
-          <View style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}}>
+          useScrollView={false}
+          applyBottomSafeArea={true}>
+          <View style={{backgroundColor: 'yellow', padding: 16, paddingTop: 0}} accessibilityLabel={'bottomSheetChild'}>
             <View>
               <Text>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-                incidunt ipsam iste provident sequi sit soluta vero voluptatibus
-                voluptatum? Debitis dicta facilis fugit in quibusdam repellendus
+                temporibus ullam, vero vitae.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                temporibus ullam, vero vitae.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
                 temporibus ullam, vero vitae.
               </Text>
               <Text>Last</Text>

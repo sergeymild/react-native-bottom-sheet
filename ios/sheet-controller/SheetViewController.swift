@@ -16,14 +16,7 @@ open class SheetViewController: UIViewController {
   public private(set) weak var childViewController: UIViewController?
   
   public let containerView = UIView()
-  /// The view that can be pulled to resize a sheeet. This includes the background. To change the color of the bar, use `handleView` instead
-  public let pullBarView = UIView()
-  public let handleView = UIView()
   public static let baseOverlayColor = UIColor(white: 0, alpha: 0.7)
-  public static let handleColor: UIColor = UIColor(white: 0, alpha: 0.24)
-  public static let handleSize: CGSize = CGSize(width: 50, height: 6)
-  public static let handleTopEdgeInset: CGFloat = 9
-  public static let handleBottomEdgeInset: CGFloat = 9
   public static let iPadBottomInset: CGFloat = 16
   
   /// If true, tapping on the overlay above the sheet will dismiss the sheet view controller
@@ -40,26 +33,7 @@ open class SheetViewController: UIViewController {
   /// If true, sheet's dismiss view will be generated, otherwise sheet remains fixed and will need to be dismissed programatically
   public var dismissable: Bool = true
   
-  public var pullBarBackgroundColor: UIColor = UIColor.white.withAlphaComponent(0.12)
-  public var shouldShowHandleView: Bool = true {
-    didSet {
-      if !shouldShowHandleView { extendBackgroundBehindHandle = false }
-    }
-  }
-  public var extendBackgroundBehindHandle: Bool = true {
-    didSet {
-      guard isViewLoaded else { return }
-      self.pullBarView.backgroundColor = extendBackgroundBehindHandle
-        ? childViewController?.view.backgroundColor
-        : UIColor.clear
-      self.updateRoundedCorners()
-    }
-  }
-  
   private var firstPanPoint: CGPoint = CGPoint.zero
-  
-  /// If true, the child view controller will be inset to account for the bottom safe area. This must be set before the sheet view controller loads for it to function properly
-  public var adjustForBottomSafeArea: Bool = false
   
   /// Adjust corner radius for the top corners. Only available for iOS 11 and above
   public var topCornersRadius: CGFloat = 3 {
@@ -70,7 +44,7 @@ open class SheetViewController: UIViewController {
   }
   
   /// The color of the overlay above the sheet. Default is a transparent black.
-  public var overlayColor: UIColor = UIColor(white: 0, alpha: 0.7) {
+  public var overlayColor: UIColor = UIColor(white: 0, alpha: 0.5) {
     didSet {
       if self.isViewLoaded && self.view?.window != nil {
         self.view.backgroundColor = self.overlayColor
@@ -177,7 +151,6 @@ open class SheetViewController: UIViewController {
       self.setUpDismissView()
     }
     
-    if shouldShowHandleView { self.setUpPullBarView() }
     self.setUpChildViewController()
     self.updateRoundedCorners()
     
@@ -214,9 +187,6 @@ open class SheetViewController: UIViewController {
   public func addViewForSwipeDismiss(view: UIView?) {
     let p = InitialTouchPanGestureRecognizer(target: self, action: #selector(panned(_:)))
     view?.addGestureRecognizer(p)
-    if view is UINavigationBar {
-      self.pullBarView.addGestureRecognizer(panGestureRecognizer)
-    }
   }
   
   public override func viewWillAppear(_ animated: Bool) {
@@ -262,6 +232,7 @@ open class SheetViewController: UIViewController {
   }
   
   private func setUpContainerView() {
+    self.containerView.accessibilityLabel = "BottomSheetcontainerLabel"
     self.view.addSubview(self.containerView) { (subview) in
       if UIDevice.current.userInterfaceIdiom == .pad {
         subview.width.set(prefferedControllerWidth)
@@ -294,20 +265,9 @@ open class SheetViewController: UIViewController {
   private func setUpChildViewController() {
     self.childViewController?.willMove(toParent: self)
     self.addChild(self.childViewController!)
-    let bottomInset = self.safeAreaInsets.bottom
     
     self.containerView.addSubview(self.childViewController!.view) { (subview) in
-      subview.edges(.left, .right).pinToSuperview()
-      if self.adjustForBottomSafeArea {
-        subview.bottom.pinToSuperview(inset: bottomInset, relation: .equal)
-      } else {
-        subview.bottom.pinToSuperview()
-      }
-      subview.top.align(
-        with: shouldShowHandleView
-          ? self.pullBarView.al.bottom
-          : self.containerView.al.top
-      )
+        subview.edges(.left, .right, .top, .bottom).pinToSuperview()
     }
     
     self.childViewController?.view.layer.masksToBounds = true
@@ -346,28 +306,6 @@ open class SheetViewController: UIViewController {
     
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissTapped))
     dismissAreaView.addGestureRecognizer(tapGestureRecognizer)
-  }
-  
-  private func setUpPullBarView() {
-    self.containerView.addSubview(self.pullBarView) { (subview) in
-      subview.edges(.top, .left, .right).pinToSuperview()
-    }
-    
-    self.pullBarView.addSubview(handleView) { (subview) in
-      subview.top.pinToSuperview(inset: Self.handleTopEdgeInset, relation: .equal)
-      subview.bottom.pinToSuperview(inset: Self.handleBottomEdgeInset, relation: .equal)
-      subview.centerX.alignWithSuperview()
-      subview.size.set(Self.handleSize)
-    }
-    pullBarView.layer.masksToBounds = true
-    pullBarView.backgroundColor = extendBackgroundBehindHandle
-      ? childViewController!.view.backgroundColor
-      : UIColor.clear
-    
-    handleView.layer.cornerRadius = Self.handleSize.height / 2.0
-    handleView.layer.masksToBounds = true
-    handleView.backgroundColor = Self.handleColor
-    pullBarView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissTapped)))
   }
   
   @objc func dismissTapped() {
@@ -534,7 +472,7 @@ open class SheetViewController: UIViewController {
       let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
       
       UIView.animate(withDuration: duration, delay: 0, options: animationCurve, animations: {
-          self.containerBottomConstraint.constant = min(0, -height + (self.adjustForBottomSafeArea ? self.safeAreaInsets.bottom : 0))
+          self.containerBottomConstraint.constant = min(0, -height)
           // Tell our child view it needs to layout again to prevent the navigation bar from moving to the wrong spot if in a UINavigationController
           self.childViewController?.view.setNeedsLayout()
           self.view.layoutIfNeeded()

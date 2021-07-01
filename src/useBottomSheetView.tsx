@@ -23,6 +23,8 @@ interface BottomSheetProps {
   /** Corner radius of a top bar
    * @default 0 */
   readonly cornerRadius?: number
+
+  readonly applyBottomSafeArea?: boolean
 }
 
 export type PublicBottomSheetProps = PropsWithChildren<BottomSheetProps>
@@ -96,6 +98,7 @@ export class UseBottomSheetView extends PureComponent<
         sheetSize={this.props.sheetSize?.toString()}
         cornerRadius={this.props.cornerRadius}
         useScrollView={this.props.useScrollView}
+        applyBottomSafeArea={this.props.applyBottomSafeArea ?? true}
         ref={this.sheetRef}
         onDismiss={this._onDismiss}
         isVisible={this.state.isVisible}

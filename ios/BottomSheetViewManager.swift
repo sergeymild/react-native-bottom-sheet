@@ -14,12 +14,17 @@ class BottomSheetView : UIView {
     private var useScrollView = true
     @objc
     private var onDismiss: RCTBubblingEventBlock?
+    @objc
+    private var applyBottomSafeArea: Bool = true
     
     private weak var sheetController: SheetViewController?
+    
+    static weak var bridge: RCTBridge?
     
     init(frame: CGRect, bridge: RCTBridge) {
         touchHandler = RCTTouchHandler(bridge: bridge)
         super.init(frame: frame)
+        Self.bridge = bridge
         debugPrint("init", self)
         alpha = 0
     }
@@ -76,7 +81,8 @@ class BottomSheetView : UIView {
         let sheetView = BottomSheetScrollView(
             child: v,
             sizeType: sheetSize,
-            useScrollView: useScrollView
+            useScrollView: useScrollView,
+            shouldApplyBottomSafeArea: applyBottomSafeArea
         )
         controller.view = sheetView
         self.sheetView = sheetView
@@ -93,8 +99,6 @@ class BottomSheetView : UIView {
         sheetWeakRefs.append(SheetWeakRef(sheet: sheetController))
         
         sheetController.topCornersRadius = CGFloat(cornerRadius)
-        sheetController.extendBackgroundBehindHandle = false
-        sheetController.shouldShowHandleView = false
         
         sheetView.sheetController = sheetController
         topPresentingController.present(sheetController, animated: false)
