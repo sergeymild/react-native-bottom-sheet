@@ -1,5 +1,7 @@
 package com.reactnativebottomsheet
 
+import android.view.ViewGroup
+import com.facebook.react.ReactRootView
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.LayoutShadowNode
 import com.facebook.react.uimanager.UIImplementation
@@ -58,6 +60,14 @@ object ReactUpdateHelper {
             }
         }
     }
+
+    fun getReactRootView(context: ReactContext): ReactRootView {
+        val activity = context.currentActivity!!
+        val contentView = activity.window.findViewById<ViewGroup>(android.R.id.content)
+        return contentView.getChildAt(0) as ReactRootView
+    }
+
+    fun getReactRootTag(context: ReactContext) = getReactRootView(context).rootViewTag
 }
 
 fun LayoutShadowNode.updateReactLayout(index: Int, height: Int) {
