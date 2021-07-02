@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "react": "17.0.2",
-    "react-native": "0.64.2"
+    "react-native": "0.64.2",
+    "@gorhom/portal": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
