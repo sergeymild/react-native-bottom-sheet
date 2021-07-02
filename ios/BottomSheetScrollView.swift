@@ -93,7 +93,7 @@ class BottomSheetScrollView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        assert(subviews.count > 1, "BottomSheet can't have more that one subview")
+        assert(subviews.count == 1, "BottomSheet can't have more that one subview")
         backgroundColor = bottomSheetChild.backgroundColor
         
         if sizeType != "dynamic" {
