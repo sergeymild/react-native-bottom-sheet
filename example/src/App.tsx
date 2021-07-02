@@ -1,11 +1,13 @@
 import * as React from 'react'
 import {useRef, useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {BottomSheetModal, BottomSheetModalType} from 'react-native-bottom-sheet'
-import { Portal, PortalHost, PortalProvider } from "@gorhom/portal";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from 'react-native-bottom-sheet'
 
 export default function App() {
-  const first = useRef<BottomSheetModalType>(null)
+  const first = useRef<BottomSheetModal>(null)
 
   const [text, setText] = useState('dynamic')
 
@@ -17,33 +19,40 @@ export default function App() {
   // }, [])
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={{marginTop: 100, backgroundColor: 'red'}}
-        onPress={() => {
-          first.current?.present()
-        }}>
-        <Text>{text}</Text>
-      </TouchableOpacity>
+    <BottomSheetModalProvider>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={{marginTop: 100, backgroundColor: 'red'}}
+          onPress={() => {
+            first.current?.present()
+          }}>
+          <Text>{text}</Text>
+        </TouchableOpacity>
 
-      <View style={styles.box}>
-        <BottomSheetModal
-          ref={first}
-          onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
-          useScrollView={true}
-          applyBottomSafeArea={true}>
-          <View style={{backgroundColor: 'red'}}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
-              temporibus ullam, vero vitae. Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Eius temporibus ullam, vero
-              vitae. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit. Eius temporibus ullam, vero vitae.
-            </Text>
-          </View>
-        </BottomSheetModal>
+        <View style={styles.box}>
+          <BottomSheetModal
+            ref={first}
+            onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
+            useScrollView={true}
+            applyBottomSafeArea={true}>
+            <View style={{backgroundColor: 'red'}}>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                temporibus ullam, vero vitae. Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Eius temporibus ullam, vero vitae.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                temporibus ullam, vero vitae.Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Eius temporibus ullam, vero vitae.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius
+                temporibus ullam, vero vitae. Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Eius temporibus ullam, vero vitae.
+              </Text>
+              <Text>{'            '}Last</Text>
+            </View>
+          </BottomSheetModal>
+        </View>
       </View>
-    </View>
+    </BottomSheetModalProvider>
   )
 }
 

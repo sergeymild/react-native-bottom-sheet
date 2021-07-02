@@ -1,3 +1,4 @@
+import {Portal} from '@gorhom/portal'
 import React, {createRef, PropsWithChildren, PureComponent} from 'react'
 import ReactNative, {StyleSheet, UIManager} from 'react-native'
 
@@ -24,9 +25,7 @@ interface BottomSheetProps {
 
 export type PublicBottomSheetProps = PropsWithChildren<BottomSheetProps>
 
-export type UseBottomSheet = UseBottomSheetView
-
-export class UseBottomSheetView extends PureComponent<
+export class BottomSheetModal extends PureComponent<
   PublicBottomSheetProps,
   State
 > {
@@ -70,18 +69,20 @@ export class UseBottomSheetView extends PureComponent<
     }
 
     return (
-      <BottomSheetViewManager
-        //@ts-ignore
-        style={[StyleSheet.absoluteFill]}
-        sheetSize={this.props.sheetSize?.toString()}
-        cornerRadius={this.props.cornerRadius}
-        useScrollView={this.props.useScrollView}
-        applyBottomSafeArea={this.props.applyBottomSafeArea ?? true}
-        ref={this.sheetRef}
-        onDismiss={this._onDismiss}
-        isVisible={this.state.isVisible}
-        children={React.Children.only(this.props.children)}
-      />
+      <Portal name={'bottomSheetPortalHost'}>
+        <BottomSheetViewManager
+          //@ts-ignore
+          style={[StyleSheet.absoluteFill]}
+          sheetSize={this.props.sheetSize?.toString()}
+          cornerRadius={this.props.cornerRadius}
+          useScrollView={this.props.useScrollView}
+          applyBottomSafeArea={this.props.applyBottomSafeArea ?? true}
+          ref={this.sheetRef}
+          onDismiss={this._onDismiss}
+          isVisible={this.state.isVisible}
+          children={React.Children.only(this.props.children)}
+        />
+      </Portal>
     )
   }
 }

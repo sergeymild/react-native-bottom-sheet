@@ -1,6 +1,4 @@
-import {
-  UseBottomSheet as BottomSheetModalType,
-  UseBottomSheetView as BottomSheetModal,
-} from './useBottomSheetView'
+import {BottomSheetModal} from './BottomSheetModal'
 
-export {BottomSheetModal, BottomSheetModalType}
+export {BottomSheetModal}
+export * from './BottomSheetModalProvider'
