@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.4",
-    "react-native-bottom-sheet": "file:.."
+    "react-native": "0.64.2",
+    "react-native-bottom-sheet": "https://github.com/sergeymild/react-native-bottom-sheet.git"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

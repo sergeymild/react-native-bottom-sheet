@@ -15,7 +15,7 @@ object ReactUpdateHelper {
     private var _operationsQueue: UIViewOperationQueue? = null
     private var _dispatchViewUpdateMethod: Method? = null
 
-    fun getUiManager(c: ReactContext): UIManagerModule {
+    fun getUiManager(c: ReactContext): UIManagerModule? {
         _uiManager?.let { return it }
         val manager = c.getNativeModule<UIManagerModule>(UIManagerModule::class.java)
         _uiManager = manager
@@ -24,7 +24,7 @@ object ReactUpdateHelper {
 
     fun getUiImplementation(c: ReactContext): UIImplementation {
         _uiImplementation?.let { return it }
-        val uiManager = getUiManager(c)
+        val uiManager = getUiManager(c)!!
         val obj = uiManager::class.java.getDeclaredField("mUIImplementation").let { f ->
             f.isAccessible = true
             f.get(uiManager) as UIImplementation
@@ -73,7 +73,7 @@ object ReactUpdateHelper {
 fun LayoutShadowNode.updateReactLayout(index: Int, height: Int) {
     try {
         // Check view is exists
-        ReactUpdateHelper.getUiManager(themedContext).resolveView(reactTag)
+        ReactUpdateHelper.getUiManager(themedContext)?.resolveView(reactTag)
 
         ReactUpdateHelper
             .getOperationsQueue(themedContext)
