@@ -122,27 +122,27 @@ export default function App() {
   )
 
   return (
-    // <BottomSheetModalProvider>
-    //   <View style={styles.container}>
-    //     <TouchableOpacity
-    //       style={{marginTop: 100, backgroundColor: 'red'}}
-    //       onPress={() => {
-    //         first.current?.present()
-    //       }}>
-    //       <Text>{text}</Text>
-    //     </TouchableOpacity>
-    //
-    //     <View style={styles.box}>
-    //       <BottomSheetModal
-    //         ref={first}
-    //         onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
-    //         useScrollView={true}
-    //         applyBottomSafeArea={true}>
-    //         {list}
-    //       </BottomSheetModal>
-    //     </View>
-    //   </View>
-    // </BottomSheetModalProvider>
+    <BottomSheetModalProvider>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={{marginTop: 100, backgroundColor: 'red'}}
+          onPress={() => {
+            first.current?.present()
+          }}>
+          <Text>{text}</Text>
+        </TouchableOpacity>
+
+        <View style={styles.box}>
+          <BottomSheetModal
+            ref={first}
+            onDismiss={() => console.log('ds0-dsa-dsa0ds-dsa-sda')}
+            useScrollView={false}
+            applyBottomSafeArea={true}>
+            {list}
+          </BottomSheetModal>
+        </View>
+      </View>
+    </BottomSheetModalProvider>
   )
 }
 
