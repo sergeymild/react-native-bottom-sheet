@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottom-sheet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bottom sheet dialog implementations for React Native",
   "main": "src/index",
   "module": "src/index",
